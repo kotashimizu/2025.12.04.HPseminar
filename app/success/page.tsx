@@ -214,7 +214,7 @@ export default function SuccessPage() {
 
           <p className="text-sm text-gray-600">
             ご不明な点がございましたら、
-            <a href="mailto:support@example.com" className="text-blue-600 hover:text-blue-700 font-bold">
+            <a href="mailto:info@ichi-company.net" className="text-blue-600 hover:text-blue-700 font-bold">
               こちら
             </a>
             までお問い合わせください

@@ -43,8 +43,7 @@ export default function LegalPage() {
               販売業者
             </h2>
             <p className="text-gray-700">
-              【会社名または屋号を記載】<br />
-              例：株式会社〇〇
+              合同会社ICHI.
             </p>
           </section>
 
@@ -54,8 +53,7 @@ export default function LegalPage() {
               運営責任者
             </h2>
             <p className="text-gray-700">
-              【代表者名を記載】<br />
-              例：山田 太郎
+              代表社員 志水 康太
             </p>
           </section>
 
@@ -65,21 +63,8 @@ export default function LegalPage() {
               所在地
             </h2>
             <p className="text-gray-700">
-              【実際の住所を記載】<br />
-              例：〒100-0001<br />
-              東京都千代田区千代田1-1-1
-            </p>
-          </section>
-
-          {/* 電話番号 */}
-          <section className="bg-gray-50 rounded-lg p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
-              電話番号
-            </h2>
-            <p className="text-gray-700">
-              【実際の電話番号を記載】<br />
-              例：03-XXXX-XXXX<br />
-              受付時間：平日 10:00〜17:00
+              〒444-0059<br />
+              愛知県岡崎市康生通西3丁目28番地
             </p>
           </section>
 
@@ -89,8 +74,8 @@ export default function LegalPage() {
               メールアドレス
             </h2>
             <p className="text-gray-700">
-              【実際のメールアドレスを記載】<br />
-              例：info@example.com
+              info@ichi-company.net<br />
+              受付時間：平日 10:00〜17:00
             </p>
           </section>
 
@@ -101,8 +86,15 @@ export default function LegalPage() {
             </h2>
             <p className="text-gray-700">
               セミナー参加費：<br />
-              ・早割価格（先着10名様）：2,980円（税込）<br />
-              ・通常価格（11名以降）：3,480円（税込）<br />
+              ・早割価格（先着10名様）：4,980円（税込）<br />
+              ・通常価格（11名以降）：6,980円（税込）<br />
+              <br />
+              特典総額：33,000円相当<br />
+              ・カスタムGPTs×2（15,000円相当）<br />
+              ・テンプレート集（5,000円相当）<br />
+              ・質問し放題・2週間（10,000円相当）<br />
+              ・録画視聴OK（3,000円相当）<br />
+              <br />
               ※表示価格はすべて税込価格です
             </p>
           </section>
@@ -145,7 +137,7 @@ export default function LegalPage() {
               サービスの提供時期
             </h2>
             <p className="text-gray-700">
-              セミナー開催日：2025年11月5日（火）16:00〜18:00<br />
+              セミナー開催日：2025年12月4日（水）21:00～22:30<br />
               開催形式：オンライン（Zoom）<br />
               Zoomリンク：セミナー前日までにメールでお送りします
             </p>
@@ -157,28 +149,31 @@ export default function LegalPage() {
               返品・キャンセルポリシー
             </h2>
             <div className="text-gray-700 space-y-3">
-              <p className="font-semibold">【キャンセル期限】</p>
-              <ul className="list-disc list-inside ml-4 space-y-1">
-                <li>セミナー開催日の3日前まで：全額返金（手数料無料）</li>
-                <li>セミナー開催日の2日前：50%返金</li>
-                <li>セミナー開催日の前日以降：返金不可</li>
-              </ul>
-              
-              <p className="font-semibold mt-4">【返金方法】</p>
+              <p className="font-semibold">【キャンセル・返金について】</p>
               <p>
-                決済時に使用したクレジットカードへの返金となります。<br />
-                返金処理完了まで、5〜10営業日程度かかる場合がございます。
+                商品の性質上、お申し込み後の返品・キャンセル・返金は原則としてお受けできません。<br />
+                ただし、以下の場合に限り対応いたします：
+              </p>
+              <ul className="list-disc list-inside ml-4 space-y-1">
+                <li>天災・システム障害等、当社の責に帰すべき事由によりセミナーが中止となった場合：全額返金</li>
+                <li>技術的な問題により、当社の責に帰すべき理由でセミナーに参加できなかった場合：個別に対応</li>
+              </ul>
+
+              <p className="font-semibold mt-4">【お客様都合のキャンセル】</p>
+              <p>
+                お客様都合によるキャンセルの場合、返金は承っておりません。<br />
+                ただし、録画動画の提供により対応させていただきます。
               </p>
 
-              <p className="font-semibold mt-4">【キャンセル手続き】</p>
+              <p className="font-semibold mt-4">【お問い合わせ】</p>
               <p>
-                下記メールアドレスまでご連絡ください：<br />
-                cancel@example.com
+                キャンセル・返金に関するお問い合わせは下記メールアドレスまでご連絡ください：<br />
+                info@ichi-company.net
               </p>
 
               <p className="mt-4 text-sm text-gray-600">
-                ※デジタルコンテンツ（録画動画等）の提供後は、返品・返金はできません<br />
-                ※天災・システム障害等、当社の責に帰すべき事由によりセミナーが中止となった場合は、全額返金いたします
+                ※デジタルコンテンツ（録画動画・GPTs・テンプレート等）の提供後は、返品・返金はできません<br />
+                ※お申し込み前に、セミナー内容・日時をご確認の上、お申し込みください
               </p>
             </div>
           </section>
@@ -193,7 +188,7 @@ export default function LegalPage() {
               セミナーに参加できなかった場合は、
               下記までご連絡ください。状況を確認の上、適切な対応をいたします。<br />
               <br />
-              お問い合わせ先：support@example.com
+              お問い合わせ先：info@ichi-company.net
             </p>
           </section>
 
@@ -215,10 +210,10 @@ export default function LegalPage() {
               個人情報の取り扱い
             </h2>
             <p className="text-gray-700">
-              お客様からお預かりした個人情報は、商品の発送、サービスの提供、
+              お客様からお預かりした個人情報は、セミナーの運営、サービスの提供、
               お問い合わせへの回答のみに使用し、それ以外の目的では使用いたしません。<br />
               詳しくは
-              <Link href="/privacy" className="text-orange-600 hover:text-orange-500 mx-1">
+              <Link href="/privacy" className="text-blue-600 hover:text-blue-500 mx-1">
                 プライバシーポリシー
               </Link>
               をご覧ください。
