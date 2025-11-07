@@ -1,13 +1,15 @@
 /**
  * AIセミナー申込みフォームコンポーネント
  * このコンポーネントはブラウザ上で動作します（クライアントコンポーネント）
- * 
+ *
  * 処理の流れ：
- * 1. ユーザーが情報を入力
- * 2. フォーム送信時にGASへデータ送信（顧客情報を保存）
+ * 1. ユーザーが氏名・メールアドレスを入力
+ * 2. フォーム送信時にローカルストレージに一時保存
  * 3. 参加人数に応じて適切な価格の決済ページへリダイレクト
  *    - 最初の10名: ¥4,980（早割）
  *    - 11名以降: ¥6,980（通常価格）
+ * 4. 決済完了後、successページでローカルストレージから取得しGASへ送信
+ *    ※決済完了した人のデータのみがGASに保存される
  */
 
 'use client'; // このファイルはブラウザ上で実行されることを示す
@@ -25,7 +27,7 @@ const STRIPE_PAYMENT_LINK_REGULAR = process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK_
 const SEMINAR_CAPACITY = Number(process.env.NEXT_PUBLIC_SEMINAR_CAPACITY) || 30; // 定員30名
 const EARLY_BIRD_LIMIT = Number(process.env.NEXT_PUBLIC_EARLY_BIRD_LIMIT) || 10; // 早割は10名まで
 
-// Google Apps ScriptのURL（後で環境変数に設定）
+// Google Apps ScriptのURL（参加人数取得用）
 const GAS_URL = process.env.NEXT_PUBLIC_GAS_URL || '';
 
 export default function ApplicationForm() {
@@ -102,10 +104,11 @@ export default function ApplicationForm() {
 
   /**
    * フォーム送信時の処理
+   * 決済前にローカルストレージに保存し、決済完了後にGASへ送信する
    */
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // ページのリロードを防ぐ
-    
+
     // 満員チェック
     if (isFull()) {
       setError('申し訳ございません。定員に達したため受付を終了しました。');
@@ -125,23 +128,10 @@ export default function ApplicationForm() {
     };
 
     try {
-      // GASが設定されている場合は送信
-      if (GAS_URL) {
-        const response = await fetch(GAS_URL, {
-          method: 'POST',
-          mode: 'no-cors', // GASはno-corsモードで送信する必要がある
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        });
-
-        // no-corsモードではレスポンスの内容を確認できないため、
-        // エラーが発生しなければ成功とみなす
-        console.log('GASへのデータ送信完了:', data);
-      } else {
-        // GAS URLが未設定の場合はコンソールに出力（開発中）
-        console.log('GAS URL未設定。送信データ:', data);
+      // 決済完了後にGASへ送信するため、ローカルストレージに一時保存
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('seminar_registration', JSON.stringify(data));
+        console.log('フォームデータをローカルストレージに保存:', data);
       }
 
       // 決済ページにリダイレクト

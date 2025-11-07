@@ -14,7 +14,8 @@
       "Bash(git commit:*)",
       "Bash(gh repo create:*)",
       "Bash(gh repo:*)",
-      "Bash(xargs kill:*)"
+      "Bash(xargs kill:*)",
+      "Bash(git push:*)"
     ]
   },
   "enableAllProjectMcpServers": true,

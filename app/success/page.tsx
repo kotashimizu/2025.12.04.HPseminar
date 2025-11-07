@@ -1,20 +1,80 @@
 /**
  * 決済完了ページ
- * ペライチ風のフレンドリーなデザイン（絵文字なし・アイコン使用）
+ * 決済完了後にGASへデータを送信する
  */
 
+'use client';
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { CheckCircle, Calendar, Monitor, Link as LinkIcon, FileText, MessageCircle, Video, ArrowLeft, Bot } from 'lucide-react';
 
-export const metadata = {
-  title: 'お申し込みありがとうございます | ホームページ作成セミナー',
-  description: '決済が完了しました',
-};
+// Google Apps ScriptのURL（環境変数から取得）
+const GAS_URL = process.env.NEXT_PUBLIC_GAS_URL || '';
 
 export default function SuccessPage() {
+  const [isSending, setIsSending] = useState(true);
+  const [sendError, setSendError] = useState(false);
+
+  useEffect(() => {
+    // 決済完了後、ローカルストレージからデータを取得してGASに送信
+    const sendToGAS = async () => {
+      try {
+        // ローカルストレージからデータを取得
+        const savedData = localStorage.getItem('seminar_registration');
+
+        if (!savedData) {
+          console.warn('ローカルストレージにデータが見つかりません');
+          setIsSending(false);
+          return;
+        }
+
+        const registrationData = JSON.parse(savedData);
+        console.log('決済完了。GASへデータ送信開始:', registrationData);
+
+        // GASが設定されている場合は送信
+        if (GAS_URL) {
+          await fetch(GAS_URL, {
+            method: 'POST',
+            mode: 'no-cors', // GASはno-corsモードで送信する必要がある
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(registrationData),
+          });
+
+          console.log('GASへのデータ送信完了');
+
+          // 送信完了後、ローカルストレージをクリア
+          localStorage.removeItem('seminar_registration');
+          console.log('ローカルストレージをクリアしました');
+        } else {
+          console.warn('GAS URLが未設定です');
+        }
+
+        setIsSending(false);
+      } catch (error) {
+        console.error('GAS送信エラー:', error);
+        setSendError(true);
+        setIsSending(false);
+      }
+    };
+
+    sendToGAS();
+  }, []);
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex items-center justify-center px-6 py-12">
       <div className="max-w-2xl w-full">
+        {/* データ送信エラーの表示 */}
+        {sendError && (
+          <div className="mb-6 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+            <p className="text-sm text-yellow-800">
+              ⚠️ データの保存に問題が発生しましたが、決済は正常に完了しています。
+              確認メールが届かない場合はお問い合わせください。
+            </p>
+          </div>
+        )}
+
         {/* 成功アニメーション */}
         <div className="text-center mb-8">
           <div className="mx-auto w-32 h-32 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center mb-6 shadow-2xl animate-bounce">
