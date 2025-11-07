@@ -26,74 +26,98 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       {/* ヒーローセクション */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-500 to-blue-600 py-16 sm:py-24 lg:py-32">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-400 py-12 sm:py-16 lg:py-24">
+        {/* 装飾的な背景要素 */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-700/30 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
             {/* 左側：テキスト */}
             <div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white mb-6 sm:mb-8 leading-tight">
-                ホームページ<br />作成セミナー
+              {/* キャッチコピーバッジ */}
+              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-white/30">
+                <Sparkles className="w-4 h-4 text-yellow-300" />
+                <span className="text-white text-sm font-bold">AI × ノーコードで誰でも簡単</span>
+              </div>
+
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white mb-4 sm:mb-6 leading-tight">
+                ホームページ<br />
+                作成セミナー
               </h1>
 
-              <p className="text-lg sm:text-xl md:text-2xl text-white mb-8 sm:mb-12 leading-relaxed">
-                ChatGPT × Readdy で<br />
-                ホームページ・LP作成を<br />
-                たった2時間でマスター
+              <p className="text-base sm:text-lg md:text-xl text-white/95 mb-6 sm:mb-8 leading-relaxed">
+                ChatGPT × Readdy でたった2時間。<br />
+                専門知識ゼロからプロ級サイトを作成
               </p>
 
-              {/* 開催情報 */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-white/20">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-white">
-                  <div>
-                    <Calendar className="w-5 h-5 mb-2 opacity-80" />
-                    <div className="text-sm opacity-80">日時</div>
-                    <div className="font-bold">11/5（火）</div>
-                    <div className="text-sm">16:00-18:00</div>
+              {/* 開催情報 - コンパクト */}
+              <div className="flex flex-wrap gap-3 mb-6 sm:mb-8">
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/20">
+                  <div className="flex items-center gap-2 text-white">
+                    <Calendar className="w-4 h-4" />
+                    <span className="text-sm font-medium">11/5（火）16:00-18:00</span>
                   </div>
-                  <div>
-                    <Monitor className="w-5 h-5 mb-2 opacity-80" />
-                    <div className="text-sm opacity-80">形式</div>
-                    <div className="font-bold">オンライン</div>
-                    <div className="text-sm">Zoom使用</div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/20">
+                  <div className="flex items-center gap-2 text-white">
+                    <Monitor className="w-4 h-4" />
+                    <span className="text-sm font-medium">オンライン</span>
                   </div>
-                  <div>
-                    <Users className="w-5 h-5 mb-2 opacity-80" />
-                    <div className="text-sm opacity-80">定員</div>
-                    <div className="font-bold">30名</div>
-                    <div className="text-sm">少人数制</div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/20">
+                  <div className="flex items-center gap-2 text-white">
+                    <Users className="w-4 h-4" />
+                    <span className="text-sm font-medium">定員30名</span>
                   </div>
                 </div>
               </div>
 
-              {/* 早割価格 */}
-              <div className="bg-white rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 shadow-xl">
-                <div className="flex items-center justify-between">
-                  <div className="w-full">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Star className="w-4 h-4 sm:w-5 sm:h-5 text-pink-600 flex-shrink-0" />
-                      <span className="text-xs sm:text-sm font-bold text-gray-700">早割価格（先着10名）</span>
+              {/* 早割価格 - より目立つデザイン */}
+              <div className="bg-gradient-to-r from-pink-500 to-orange-500 rounded-2xl p-1 mb-6 sm:mb-8 shadow-2xl">
+                <div className="bg-white rounded-xl p-4 sm:p-6">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="bg-gradient-to-r from-pink-500 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                          早割残り10名
+                        </div>
+                      </div>
+                      <div className="flex items-baseline gap-3 mb-1">
+                        <span className="text-4xl sm:text-5xl font-black bg-gradient-to-r from-pink-600 to-orange-600 bg-clip-text text-transparent">¥4,980</span>
+                        <span className="text-xl text-gray-400 line-through">¥6,980</span>
+                      </div>
+                      <p className="text-xs text-gray-600">特典総額¥33,000相当含む</p>
                     </div>
-                    <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
-                      <span className="text-3xl sm:text-4xl font-black text-pink-600">¥4,980</span>
-                      <span className="text-lg sm:text-xl text-gray-400 line-through">¥6,980</span>
+                    <div className="text-right">
+                      <div className="text-3xl font-black text-pink-600">29%</div>
+                      <div className="text-xs text-gray-600">OFF</div>
                     </div>
-                    <p className="text-xs text-gray-600 mt-2">※特典総額¥33,000相当が含まれます</p>
                   </div>
                 </div>
               </div>
 
+              {/* CTAボタン */}
               <a
                 href="#application"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-pink-600 px-8 sm:px-12 py-4 sm:py-5 text-lg sm:text-xl font-bold text-white shadow-xl hover:bg-pink-700 transition-all duration-200 hover:scale-105 min-h-[44px]"
+                className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-pink-600 to-pink-500 px-8 sm:px-12 py-4 sm:py-5 text-lg sm:text-xl font-bold text-white shadow-2xl hover:shadow-pink-500/50 transition-all duration-300 hover:scale-105 min-h-[44px]"
               >
                 今すぐ申し込む
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
+
+              {/* 安心要素 */}
+              <p className="text-xs sm:text-sm text-white/80 mt-4 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
+                <span>録画視聴OK・質問サポート付き</span>
+              </p>
             </div>
 
-            {/* 右側：画像 */}
-            <div className="relative flex justify-center lg:justify-end">
-              <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl w-full max-w-[280px] sm:max-w-sm md:max-w-md">
+            {/* 右側：画像（PCのみ） */}
+            <div className="hidden lg:flex relative justify-center lg:justify-end">
+              <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl w-full max-w-md transform hover:scale-105 transition-transform duration-300">
                 <Image
                   src="/images/hero-person.png"
                   alt="パソコンで作業をする人"
@@ -115,42 +139,39 @@ export default function Home() {
             このセミナーで<br className="sm:hidden" />できること
           </h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center mb-12 sm:mb-16 lg:mb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-12 sm:mb-16 lg:mb-20">
+            {/* 左側：テキスト */}
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">こんなお悩みありませんか？</h3>
+              <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">こんなお悩みありませんか？</h3>
 
-              <div className="space-y-4 mb-8">
+              <div className="space-y-4 sm:space-y-5">
                 <div className="flex items-start gap-3">
                   <div className="flex-shrink-0 w-6 h-6 rounded-full bg-pink-100 flex items-center justify-center mt-1">
                     <span className="text-pink-600 text-sm font-bold">!</span>
                   </div>
-                  <p className="text-lg text-gray-700">ホームページを作りたいけど、制作会社に頼むと<strong>数十万円</strong>もかかる</p>
+                  <p className="text-base sm:text-lg text-gray-700">ホームページを作りたいけど、制作会社に頼むと<strong>数十万円</strong>もかかる</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="flex-shrink-0 w-6 h-6 rounded-full bg-pink-100 flex items-center justify-center mt-1">
                     <span className="text-pink-600 text-sm font-bold">!</span>
                   </div>
-                  <p className="text-lg text-gray-700">自分で作ろうと思ったけど、<strong>専門知識の学習に時間</strong>がかかりすぎる</p>
+                  <p className="text-base sm:text-lg text-gray-700">自分で作ろうと思ったけど、<strong>専門知識の学習に時間</strong>がかかりすぎる</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="flex-shrink-0 w-6 h-6 rounded-full bg-pink-100 flex items-center justify-center mt-1">
                     <span className="text-pink-600 text-sm font-bold">!</span>
                   </div>
-                  <p className="text-lg text-gray-700">WordPressやノーコードツールも<strong>複雑で挫折</strong>してしまった</p>
+                  <p className="text-base sm:text-lg text-gray-700">WordPressやノーコードツールも<strong>複雑で挫折</strong>してしまった</p>
                 </div>
               </div>
-
-              <p className="text-xl leading-relaxed text-gray-700 bg-blue-50 p-6 rounded-xl">
-                このセミナーでは、<strong className="text-blue-600">ChatGPT</strong>でコンテンツや構成を作成し、
-                それを<strong className="text-blue-600">Readdy（レディ）</strong>に入力するだけで、
-                プロ並みのホームページやLP（ランディングページ）が完成します。
-              </p>
             </div>
-            <div className="relative flex justify-center">
-              <div className="w-full max-w-[240px] sm:max-w-[280px] md:max-w-sm">
+
+            {/* 右側：画像 */}
+            <div className="flex justify-center">
+              <div className="w-full max-w-[240px] sm:max-w-[280px] lg:max-w-sm">
                 <Image
                   src="/images/person-beginner.png"
-                  alt="AI初心者でも安心"
+                  alt="お悩みを抱える方"
                   width={400}
                   height={400}
                   className="w-full h-auto rounded-xl sm:rounded-2xl shadow-lg"
@@ -159,56 +180,79 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="prose prose-lg max-w-none mb-20">
+          {/* 解決策の説明 */}
+          <div className="mb-12 sm:mb-16 lg:mb-20">
+            <p className="text-lg sm:text-xl leading-relaxed text-gray-700 bg-blue-50 p-6 sm:p-8 rounded-xl sm:rounded-2xl">
+              このセミナーでは、<strong className="text-blue-600">ChatGPT</strong>でコンテンツや構成を作成し、
+              それを<strong className="text-blue-600">Readdy（レディ）</strong>に入力するだけで、
+              プロ並みのホームページやLP（ランディングページ）が完成します。
+            </p>
+          </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-              <div className="order-2 lg:order-1">
-                <div className="bg-blue-50 rounded-2xl p-10">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-8">当日の流れ</h3>
-                  <div className="space-y-6">
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-lg">
-                    1
+          <div className="prose prose-lg max-w-none mb-20 lg:relative">
+            <div className="lg:max-w-xl lg:ml-auto">
+              <div className="bg-blue-50 rounded-2xl p-6 sm:p-10">
+                <h3 className="text-2xl font-bold text-gray-900 mb-8">当日の流れ</h3>
+                <div className="space-y-6">
+                  <div className="flex gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-lg">
+                      1
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-900 mb-2 text-lg">ChatGPTで土台を作る</h4>
+                      <p className="text-gray-700">ホームページの文章、デザイン案、レイアウト構成をChatGPTで作成します。</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-bold text-gray-900 mb-2 text-lg">ChatGPTで土台を作る</h4>
-                    <p className="text-gray-700">ホームページの文章、デザイン案、レイアウト構成をChatGPTで作成します。</p>
+                  <div className="flex gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-lg">
+                      2
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-900 mb-2 text-lg">Readdyに入力して完成</h4>
+                      <p className="text-gray-700">作成した内容をReaddyに入力するだけで、あなただけのホームページが完成します。</p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-lg">
-                    2
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-gray-900 mb-2 text-lg">Readdyに入力して完成</h4>
-                    <p className="text-gray-700">作成した内容をReaddyに入力するだけで、あなただけのホームページが完成します。</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-lg">
-                    3
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-gray-900 mb-2 text-lg">効果的な活用のコツを学ぶ</h4>
-                    <p className="text-gray-700">ChatGPTとReaddyを最大限に活用するためのポイントをお伝えします。</p>
+                  <div className="flex gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-lg">
+                      3
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-900 mb-2 text-lg">効果的な活用のコツを学ぶ</h4>
+                      <p className="text-gray-700">ChatGPTとReaddyを最大限に活用するためのポイントをお伝えします。</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="order-1 lg:order-2 flex justify-center">
-            <div className="w-full max-w-[240px] sm:max-w-[280px] md:max-w-sm">
-              <Image
-                src="/images/workshop.png"
-                alt="ワークショップの様子"
-                width={400}
-                height={400}
-                className="w-full h-auto rounded-xl sm:rounded-2xl shadow-lg"
-              />
-            </div>
-          </div>
-        </div>
 
+              {/* スマホでは画像を下に表示 */}
+              <div className="flex justify-center mt-8 lg:hidden">
+                <div className="w-full max-w-[200px]">
+                  <Image
+                    src="/images/workshop.png"
+                    alt="ワークショップの様子"
+                    width={400}
+                    height={400}
+                    className="w-full h-auto rounded-xl shadow-lg"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* PCでは画像を左側に表示 */}
+            <div className="hidden lg:flex justify-center absolute top-0 left-0 w-5/12 h-full items-center">
+              <div className="w-full max-w-sm">
+                <Image
+                  src="/images/workshop.png"
+                  alt="ワークショップの様子"
+                  width={400}
+                  height={400}
+                  className="w-full h-auto rounded-2xl shadow-lg"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="prose prose-lg max-w-none">
             <h3 className="text-3xl font-bold text-gray-900 mb-8">このセミナーで解決できること</h3>
             <ul className="space-y-4 text-lg text-gray-700">
               <li className="flex items-start gap-3">

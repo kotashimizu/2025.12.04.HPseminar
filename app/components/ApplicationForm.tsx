@@ -40,13 +40,39 @@ export default function ApplicationForm() {
 
   /**
    * コンポーネント読み込み時に現在の参加人数を取得
-   * （将来的にGASから取得する予定）
+   * GASから実際の参加人数を取得
    */
   useEffect(() => {
-    // TODO: GASから実際の参加人数を取得する処理を実装
-    // 現時点では0人からスタート
-    setCurrentParticipants(0);
-    setIsLoading(false);
+    const fetchParticipantCount = async () => {
+      try {
+        if (GAS_URL) {
+          // GASから参加人数を取得
+          const response = await fetch(GAS_URL);
+          const data = await response.json();
+          
+          if (data.count !== undefined) {
+            setCurrentParticipants(data.count);
+            console.log('現在の参加人数:', data.count);
+          } else {
+            // エラー時は0人として扱う
+            setCurrentParticipants(0);
+            console.warn('参加人数の取得に失敗しました');
+          }
+        } else {
+          // GAS URLが未設定の場合は0人からスタート
+          setCurrentParticipants(0);
+          console.log('GAS URL未設定。参加人数: 0');
+        }
+      } catch (error) {
+        // エラー時は0人として扱う
+        console.error('参加人数取得エラー:', error);
+        setCurrentParticipants(0);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchParticipantCount();
   }, []);
 
   /**
