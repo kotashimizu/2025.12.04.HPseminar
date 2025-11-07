@@ -3,6 +3,9 @@
  * シンプルで洗練されたデザイン
  */
 
+'use client';
+
+import { useState, useEffect } from 'react';
 import ApplicationForm from './components/ApplicationForm';
 import Image from 'next/image';
 import {
@@ -22,7 +25,39 @@ import {
   Heart
 } from 'lucide-react';
 
+// セミナーの設定
+const SEMINAR_CAPACITY = Number(process.env.NEXT_PUBLIC_SEMINAR_CAPACITY) || 30;
+const GAS_URL = process.env.NEXT_PUBLIC_GAS_URL || '';
+
 export default function Home() {
+  const [currentParticipants, setCurrentParticipants] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // 参加人数を取得
+  useEffect(() => {
+    const fetchParticipantCount = async () => {
+      try {
+        if (GAS_URL) {
+          const response = await fetch(GAS_URL);
+          const data = await response.json();
+          if (data.count !== undefined) {
+            setCurrentParticipants(data.count);
+          }
+        }
+      } catch (error) {
+        console.error('参加人数取得エラー:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchParticipantCount();
+  }, []);
+
+  // 残席を計算
+  const remainingSeats = SEMINAR_CAPACITY - currentParticipants;
+  // 残席が10名未満の場合にのみ「残席わずか」を表示
+  const showLimitedSeats = remainingSeats < 10 && remainingSeats > 0;
   return (
     <div className="min-h-screen bg-white">
       {/* ヒーローセクション */}
@@ -437,9 +472,9 @@ export default function Home() {
                 セミナー参加費を大きく上回る価値の特典をご用意
               </p>
               <p className="text-xl font-bold text-pink-600 text-center mb-8">
-                総額¥33,000相当
+                総額¥28,000相当
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div className="text-center bg-white rounded-xl p-6 shadow-sm">
                   <div className="flex justify-center mb-3">
                     <Bot className="w-12 h-12 text-blue-600" />
@@ -447,14 +482,6 @@ export default function Home() {
                   <p className="font-bold text-gray-900">カスタムGPTs×2</p>
                   <p className="text-sm text-gray-600 mt-2">ホームページ制作に特化した2つのGPTs</p>
                   <p className="text-xs text-pink-600 font-bold mt-3">¥15,000相当</p>
-                </div>
-                <div className="text-center bg-white rounded-xl p-6 shadow-sm">
-                  <div className="flex justify-center mb-3">
-                    <FileText className="w-12 h-12 text-blue-600" />
-                  </div>
-                  <p className="font-bold text-gray-900">テンプレート集</p>
-                  <p className="text-sm text-gray-600 mt-2">すぐに使えるデザインテンプレート</p>
-                  <p className="text-xs text-pink-600 font-bold mt-3">¥5,000相当</p>
                 </div>
                 <div className="text-center bg-white rounded-xl p-6 shadow-sm">
                   <div className="flex justify-center mb-3">
@@ -482,11 +509,13 @@ export default function Home() {
       <section id="application" className="py-16 sm:py-24 lg:py-32 bg-white">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
-            <div className="inline-block mb-4">
-              <span className="inline-block rounded-full bg-pink-100 px-4 sm:px-6 py-2 text-xs sm:text-sm font-bold text-pink-700">
-                残席わずか
-              </span>
-            </div>
+            {!isLoading && showLimitedSeats && (
+              <div className="inline-block mb-4">
+                <span className="inline-block rounded-full bg-pink-100 px-4 sm:px-6 py-2 text-xs sm:text-sm font-bold text-pink-700">
+                  残席わずか
+                </span>
+              </div>
+            )}
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 mb-4 sm:mb-6">
               今すぐ申し込む
             </h2>
