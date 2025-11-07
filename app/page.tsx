@@ -93,7 +93,7 @@ export default function Home() {
                 <div className="bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/20">
                   <div className="flex items-center gap-2 text-white">
                     <Calendar className="w-4 h-4" />
-                    <span className="text-sm font-medium">11/5（火）16:00-18:00</span>
+                    <span className="text-sm font-medium">12/4（水）21:00-22:30</span>
                   </div>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/20">
