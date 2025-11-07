@@ -188,7 +188,7 @@ export default function PrivacyPage() {
             <div className="bg-gray-50 rounded-lg p-6">
               <p className="text-gray-700">
                 <strong>合同会社ICHI.</strong><br />
-                〒444-0059 愛知県岡崎市康生通西3丁目28番地<br />
+                愛知県豊川市宿町光道寺1番地<br />
                 代表者：志水 康太<br />
                 メールアドレス: info@ichi-company.net<br />
                 受付時間: 平日 10:00〜17:00

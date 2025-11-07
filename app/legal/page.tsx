@@ -63,8 +63,7 @@ export default function LegalPage() {
               所在地
             </h2>
             <p className="text-gray-700">
-              〒444-0059<br />
-              愛知県岡崎市康生通西3丁目28番地
+              愛知県豊川市宿町光道寺1番地
             </p>
           </section>
 
