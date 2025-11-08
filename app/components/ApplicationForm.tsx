@@ -17,11 +17,11 @@
 import { useState, FormEvent, useEffect } from 'react';
 import { Sparkles, AlertCircle, Loader2 } from 'lucide-react';
 
-// Stripeの決済リンクURL（環境変数から取得）
+// StripeのPrice ID（環境変数から取得）
 // 早割価格（最初の10名）: ¥4,980
-const STRIPE_PAYMENT_LINK_EARLY = process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK_EARLY || '';
+const STRIPE_PRICE_ID_EARLY = process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_EARLY || '';
 // 通常価格（11名以降）: ¥6,980
-const STRIPE_PAYMENT_LINK_REGULAR = process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK_REGULAR || '';
+const STRIPE_PRICE_ID_REGULAR = process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_REGULAR || '';
 
 // セミナーの設定
 const SEMINAR_CAPACITY = Number(process.env.NEXT_PUBLIC_SEMINAR_CAPACITY) || 30; // 定員30名
@@ -86,13 +86,13 @@ export default function ApplicationForm() {
   };
 
   /**
-   * 使用する決済リンクを決定
-   * 参加人数に応じて早割リンクか通常価格リンクを返す
+   * 使用するPrice IDを決定
+   * 参加人数に応じて早割Price IDか通常価格Price IDを返す
    */
-  const getPaymentLink = () => {
-    return currentParticipants < EARLY_BIRD_LIMIT 
-      ? STRIPE_PAYMENT_LINK_EARLY 
-      : STRIPE_PAYMENT_LINK_REGULAR;
+  const getPriceId = () => {
+    return currentParticipants < EARLY_BIRD_LIMIT
+      ? STRIPE_PRICE_ID_EARLY
+      : STRIPE_PRICE_ID_REGULAR;
   };
 
   /**
@@ -134,11 +134,31 @@ export default function ApplicationForm() {
         console.log('フォームデータをローカルストレージに保存:', data);
       }
 
-      // 決済ページにリダイレクト
-      // メールアドレスをプリフィル（事前入力）するためにURLパラメータを追加
-      const paymentLink = getPaymentLink();
-      const paymentUrl = `${paymentLink}?prefilled_email=${encodeURIComponent(data.email)}`;
-      window.location.href = paymentUrl;
+      // Checkout Sessionを作成
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: data.email,
+          name: data.name,
+          priceId: getPriceId(),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Checkout Sessionの作成に失敗しました');
+      }
+
+      const { url } = await response.json();
+
+      if (!url) {
+        throw new Error('決済URLが取得できませんでした');
+      }
+
+      // Stripe Checkoutページにリダイレクト
+      window.location.href = url;
 
     } catch (err) {
       console.error('送信エラー:', err);
