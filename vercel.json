@@ -5,10 +5,13 @@
   "framework": "nextjs",
   "regions": ["hnd1"],
   "env": {
-    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY": "your_stripe_publishable_key",
     "STRIPE_SECRET_KEY": "your_stripe_secret_key",
-    "NEXT_PUBLIC_STRIPE_PRICE_ID": "your_stripe_price_id",
-    "NEXT_PUBLIC_GAS_URL": "your_google_apps_script_url"
+    "NEXT_PUBLIC_STRIPE_PRICE_ID_EARLY": "your_stripe_early_price_id",
+    "NEXT_PUBLIC_STRIPE_PRICE_ID_REGULAR": "your_stripe_regular_price_id",
+    "NEXT_PUBLIC_SEMINAR_CAPACITY": "30",
+    "NEXT_PUBLIC_EARLY_BIRD_LIMIT": "10",
+    "NEXT_PUBLIC_GAS_URL": "your_google_apps_script_url",
+    "NEXT_PUBLIC_BASE_URL": "your_production_url"
   }
 }
 
