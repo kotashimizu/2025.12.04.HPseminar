@@ -178,7 +178,7 @@ export default function SuccessPage() {
             参加者限定特典
           </p>
           <p className="text-sm text-gray-600 text-center mb-6">
-            総額¥33,000相当
+            総額¥28,000相当
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-center">
             <div>
@@ -186,12 +186,6 @@ export default function SuccessPage() {
               <p className="font-bold text-gray-900 text-sm">カスタムGPTs×2</p>
               <p className="text-xs text-gray-600 mt-1">HP制作特化GPTs</p>
               <p className="text-xs text-pink-600 font-bold mt-2">¥15,000相当</p>
-            </div>
-            <div>
-              <FileText className="w-10 h-10 text-yellow-600 mx-auto mb-2" />
-              <p className="font-bold text-gray-900 text-sm">テンプレート集</p>
-              <p className="text-xs text-gray-600 mt-1">すぐに使えるデザイン</p>
-              <p className="text-xs text-pink-600 font-bold mt-2">¥5,000相当</p>
             </div>
             <div>
               <MessageCircle className="w-10 h-10 text-green-600 mx-auto mb-2" />

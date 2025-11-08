@@ -5,9 +5,7 @@
  * 処理の流れ：
  * 1. ユーザーが氏名・メールアドレスを入力
  * 2. フォーム送信時にローカルストレージに一時保存
- * 3. 参加人数に応じて適切な価格の決済ページへリダイレクト
- *    - 最初の10名: ¥4,980（早割）
- *    - 11名以降: ¥6,980（通常価格）
+ * 3. 固定の通常価格決済リンクにリダイレクト（現在は一律¥6,980）
  * 4. 決済完了後、successページでローカルストレージから取得しGASへ送信
  *    ※決済完了した人のデータのみがGASに保存される
  */
@@ -18,14 +16,13 @@ import { useState, FormEvent, useEffect } from 'react';
 import { Sparkles, AlertCircle, Loader2 } from 'lucide-react';
 
 // StripeのPrice ID（環境変数から取得）
-// 早割価格（最初の10名）: ¥4,980
-const STRIPE_PRICE_ID_EARLY = process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_EARLY || '';
-// 通常価格（11名以降）: ¥6,980
 const STRIPE_PRICE_ID_REGULAR = process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_REGULAR || '';
+
+// 固定価格（通常料金）
+const FIXED_PRICE = 6980;
 
 // セミナーの設定
 const SEMINAR_CAPACITY = Number(process.env.NEXT_PUBLIC_SEMINAR_CAPACITY) || 30; // 定員30名
-const EARLY_BIRD_LIMIT = Number(process.env.NEXT_PUBLIC_EARLY_BIRD_LIMIT) || 10; // 早割は10名まで
 
 // Google Apps ScriptのURL（参加人数取得用）
 const GAS_URL = process.env.NEXT_PUBLIC_GAS_URL || '';
@@ -79,20 +76,18 @@ export default function ApplicationForm() {
 
   /**
    * 現在の価格を計算
-   * 参加人数に応じて早割か通常価格かを判定
+   * 今回は一律通常価格を返す
    */
   const getCurrentPrice = () => {
-    return currentParticipants < EARLY_BIRD_LIMIT ? 4980 : 6980;
+    return FIXED_PRICE;
   };
 
   /**
    * 使用するPrice IDを決定
-   * 参加人数に応じて早割Price IDか通常価格Price IDを返す
+   * 固定の通常価格Price IDを返す
    */
   const getPriceId = () => {
-    return currentParticipants < EARLY_BIRD_LIMIT
-      ? STRIPE_PRICE_ID_EARLY
-      : STRIPE_PRICE_ID_REGULAR;
+    return STRIPE_PRICE_ID_REGULAR;
   };
 
   /**
@@ -247,31 +242,15 @@ export default function ApplicationForm() {
        {!isLoading && (
          <div className="rounded-lg bg-blue-50 p-4 border border-blue-200">
            <div className="text-center">
-             {currentParticipants < EARLY_BIRD_LIMIT ? (
-               <>
-                 <div className="flex items-center justify-center gap-2 mb-1">
-                   <Sparkles className="w-4 h-4 text-blue-600" />
-                   <p className="text-sm font-medium text-blue-900">
-                     早割価格適用中（残り{EARLY_BIRD_LIMIT - currentParticipants}名）
-                   </p>
-                 </div>
-                 <p className="text-3xl font-bold text-blue-600">
-                   ¥{getCurrentPrice().toLocaleString()}
-                 </p>
-                <p className="text-xs text-gray-600 mt-1">
-                  {EARLY_BIRD_LIMIT}名到達後は ¥6,980 になります
-                </p>
-               </>
-             ) : (
-               <>
-                 <p className="text-sm font-medium text-gray-700 mb-1">
-                   通常価格
-                 </p>
-                 <p className="text-3xl font-bold text-gray-900">
-                   ¥{getCurrentPrice().toLocaleString()}
-                 </p>
-               </>
-             )}
+             <div className="flex items-center justify-center gap-2 mb-1">
+               <Sparkles className="w-4 h-4 text-blue-600" />
+               <p className="text-sm font-medium text-blue-900">
+                 現在の参加費
+               </p>
+             </div>
+             <p className="text-3xl font-bold text-blue-600">
+               ¥{getCurrentPrice().toLocaleString()}
+             </p>
              <p className="text-sm text-gray-600 mt-2">
                残席: {SEMINAR_CAPACITY - currentParticipants}名 / 定員{SEMINAR_CAPACITY}名
              </p>
@@ -308,4 +287,3 @@ export default function ApplicationForm() {
     </form>
   );
 }
-

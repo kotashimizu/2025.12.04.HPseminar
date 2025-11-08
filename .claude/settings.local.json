@@ -15,7 +15,12 @@
       "Bash(gh repo create:*)",
       "Bash(gh repo:*)",
       "Bash(xargs kill:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "WebFetch(domain:ichi-company.net)",
+      "WebFetch(domain:www.mikawa-ai-school.com)",
+      "Bash(pkill:*)",
+      "Bash(curl:*)",
+      "mcp__serena__list_dir"
     ]
   },
   "enableAllProjectMcpServers": true,
