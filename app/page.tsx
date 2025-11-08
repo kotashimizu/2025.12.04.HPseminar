@@ -110,25 +110,22 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 早割価格 - より目立つデザイン */}
-              <div className="bg-gradient-to-r from-pink-500 to-orange-500 rounded-2xl p-1 mb-6 sm:mb-8 shadow-2xl">
+              {/* 通常価格 - シンプルなデザイン */}
+              <div className="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl p-1 mb-6 sm:mb-8 shadow-2xl">
                 <div className="bg-white rounded-xl p-4 sm:p-6">
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
-                        <div className="bg-gradient-to-r from-pink-500 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">
-                          早割残り10名
+                        <div className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                          {!isLoading && showLimitedSeats && `残席${remainingSeats}名`}
+                          {!isLoading && !showLimitedSeats && remainingSeats > 0 && '受付中'}
+                          {!isLoading && remainingSeats <= 0 && '満員御礼'}
                         </div>
                       </div>
                       <div className="flex items-baseline gap-3 mb-1">
-                        <span className="text-4xl sm:text-5xl font-black bg-gradient-to-r from-pink-600 to-orange-600 bg-clip-text text-transparent">¥4,980</span>
-                        <span className="text-xl text-gray-400 line-through">¥6,980</span>
+                        <span className="text-4xl sm:text-5xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">¥6,980</span>
                       </div>
                       <p className="text-xs text-gray-600">特典総額¥33,000相当含む</p>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-3xl font-black text-pink-600">29%</div>
-                      <div className="text-xs text-gray-600">OFF</div>
                     </div>
                   </div>
                 </div>
