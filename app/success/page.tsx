@@ -20,41 +20,47 @@ export default function SuccessPage() {
     // 決済完了後、ローカルストレージからデータを取得してGASに送信
     const sendToGAS = async () => {
       try {
+        console.log('=== /success ページ読み込み完了 ===');
+        console.log('GAS_URL:', GAS_URL);
+
         // ローカルストレージからデータを取得
         const savedData = localStorage.getItem('seminar_registration');
+        console.log('localStorageから取得したデータ:', savedData);
 
         if (!savedData) {
-          console.warn('ローカルストレージにデータが見つかりません');
+          console.warn('❌ ローカルストレージにデータが見つかりません');
           setIsSending(false);
           return;
         }
 
         const registrationData = JSON.parse(savedData);
-        console.log('決済完了。GASへデータ送信開始:', registrationData);
+        console.log('✅ 決済完了。GASへデータ送信開始:', registrationData);
 
         // GASが設定されている場合は送信
         if (GAS_URL) {
-          await fetch(GAS_URL, {
+          console.log('GASにPOST送信中...');
+          const response = await fetch(GAS_URL, {
             method: 'POST',
-            mode: 'no-cors', // GASはno-corsモードで送信する必要がある
+            mode: 'no-cors',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(registrationData),
           });
 
-          console.log('GASへのデータ送信完了');
+          console.log('✅ GASへのデータ送信完了（no-corsのためレスポンス確認不可）');
+          console.log('送信したデータ:', JSON.stringify(registrationData));
 
           // 送信完了後、ローカルストレージをクリア
           localStorage.removeItem('seminar_registration');
-          console.log('ローカルストレージをクリアしました');
+          console.log('✅ ローカルストレージをクリアしました');
         } else {
-          console.warn('GAS URLが未設定です');
+          console.warn('❌ GAS URLが未設定です');
         }
 
         setIsSending(false);
       } catch (error) {
-        console.error('GAS送信エラー:', error);
+        console.error('❌ GAS送信エラー:', error);
         setSendError(true);
         setIsSending(false);
       }
