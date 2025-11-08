@@ -128,6 +128,18 @@ export default function ApplicationForm() {
     };
 
     try {
+      // Price IDの確認
+      const priceId = getPriceId();
+      if (!priceId) {
+        setError('決済設定に問題があります。管理者にお問い合わせください。');
+        setIsSubmitting(false);
+        return;
+      }
+
+      console.log('使用するPrice ID:', priceId);
+      console.log('現在の参加人数:', currentParticipants);
+      console.log('適用価格:', getCurrentPrice());
+
       // 決済完了後にGASへ送信するため、ローカルストレージに一時保存
       if (typeof window !== 'undefined') {
         localStorage.setItem('seminar_registration', JSON.stringify(data));
@@ -143,7 +155,7 @@ export default function ApplicationForm() {
         body: JSON.stringify({
           email: data.email,
           name: data.name,
-          priceId: getPriceId(),
+          priceId: priceId,
         }),
       });
 
