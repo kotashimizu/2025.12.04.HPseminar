@@ -15,8 +15,8 @@
 import { useState, FormEvent, useEffect } from 'react';
 import { Sparkles, AlertCircle, Loader2 } from 'lucide-react';
 
-// StripeのPrice ID（環境変数から取得）
-const STRIPE_PRICE_ID_REGULAR = process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_REGULAR || '';
+// Stripeの決済リンクURL（環境変数から取得）
+const STRIPE_PAYMENT_LINK_REGULAR = process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK_REGULAR || '';
 
 // 固定価格（通常料金）
 const FIXED_PRICE = 6980;
@@ -83,11 +83,11 @@ export default function ApplicationForm() {
   };
 
   /**
-   * 使用するPrice IDを決定
-   * 固定の通常価格Price IDを返す
+   * 使用する決済リンクを決定
+   * 固定の通常価格リンクを返す
    */
-  const getPriceId = () => {
-    return STRIPE_PRICE_ID_REGULAR;
+  const getPaymentLink = () => {
+    return STRIPE_PAYMENT_LINK_REGULAR;
   };
 
   /**
@@ -123,15 +123,15 @@ export default function ApplicationForm() {
     };
 
     try {
-      // Price IDの確認
-      const priceId = getPriceId();
-      if (!priceId) {
+      // Payment Linkの確認
+      const paymentLink = getPaymentLink();
+      if (!paymentLink) {
         setError('決済設定に問題があります。管理者にお問い合わせください。');
         setIsSubmitting(false);
         return;
       }
 
-      console.log('使用するPrice ID:', priceId);
+      console.log('使用するPayment Link:', paymentLink);
       console.log('現在の参加人数:', currentParticipants);
       console.log('適用価格:', getCurrentPrice());
 
@@ -141,31 +141,8 @@ export default function ApplicationForm() {
         console.log('フォームデータをローカルストレージに保存:', data);
       }
 
-      // Checkout Sessionを作成
-      const response = await fetch('/api/create-checkout-session', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: data.email,
-          name: data.name,
-          priceId: priceId,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Checkout Sessionの作成に失敗しました');
-      }
-
-      const { url } = await response.json();
-
-      if (!url) {
-        throw new Error('決済URLが取得できませんでした');
-      }
-
-      // Stripe Checkoutページにリダイレクト
-      window.location.href = url;
+      // Stripe Payment Linkに直接リダイレクト
+      window.location.href = paymentLink;
 
     } catch (err) {
       console.error('送信エラー:', err);
