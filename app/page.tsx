@@ -121,11 +121,16 @@ export default function Home() {
                           {!isLoading && !showLimitedSeats && remainingSeats > 0 && '受付中'}
                           {!isLoading && remainingSeats <= 0 && '満員御礼'}
                         </div>
+                        <div className="bg-gray-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+                          早割終了
+                        </div>
                       </div>
                       <div className="flex items-baseline gap-3 mb-1">
                         <span className="text-4xl sm:text-5xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">¥6,980</span>
+                        <span className="text-lg sm:text-xl text-gray-400 line-through">¥4,980</span>
                       </div>
-                      <p className="text-xs text-gray-600">特典総額¥28,000相当含む</p>
+                      <p className="text-xs text-gray-600 mb-1">特典総額¥28,000相当含む</p>
+                      <p className="text-xs text-gray-500">※早割価格（先着10名）は終了しました</p>
                     </div>
                   </div>
                 </div>
