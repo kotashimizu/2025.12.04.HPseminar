@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -15,6 +13,18 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Stripe Secret Keyのチェック
+    const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+    if (!stripeSecretKey) {
+      return NextResponse.json(
+        { error: 'Stripe設定が不正です' },
+        { status: 500 }
+      );
+    }
+
+    // Stripeインスタンスを作成
+    const stripe = new Stripe(stripeSecretKey);
 
     // ベースURLを取得（本番/開発環境で自動切り替え）
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ||
