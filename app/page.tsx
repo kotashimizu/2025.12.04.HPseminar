@@ -125,7 +125,7 @@ export default function Home() {
                       <div className="flex items-baseline gap-3 mb-1">
                         <span className="text-4xl sm:text-5xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">¥6,980</span>
                       </div>
-                      <p className="text-xs text-gray-600">特典総額¥33,000相当含む</p>
+                      <p className="text-xs text-gray-600">特典総額¥28,000相当含む</p>
                     </div>
                   </div>
                 </div>
@@ -367,11 +367,13 @@ export default function Home() {
                             </div>
                           </td>
                           <td className="px-3 sm:px-6 py-3 sm:py-4">
-                            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-                              <span className="text-xl sm:text-2xl font-black text-pink-600 whitespace-nowrap">¥4,980</span>
-                              <span className="text-xs sm:text-sm text-gray-500 line-through whitespace-nowrap">¥6,980</span>
+                            <div className="flex flex-col gap-1">
+                              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                                <span className="text-xl sm:text-2xl font-black text-pink-600 whitespace-nowrap">¥6,980</span>
+                                <span className="text-xs sm:text-sm text-gray-500 line-through whitespace-nowrap">¥4,980</span>
+                              </div>
+                              <p className="text-xs text-gray-600 mt-1 whitespace-nowrap">早割終了・通常価格</p>
                             </div>
-                            <p className="text-xs text-pink-600 font-bold mt-1 whitespace-nowrap">早割価格（先着10名）</p>
                           </td>
                           <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-900 font-bold whitespace-nowrap">たった2時間</td>
                           <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-900 font-bold whitespace-nowrap">質問し放題</td>
@@ -419,7 +421,7 @@ export default function Home() {
 
                 <div className="bg-gradient-to-r from-pink-100 to-blue-100 rounded-xl p-6 text-center">
                   <p className="text-lg text-gray-900 mb-2">
-                    <strong className="text-pink-600">特典総額¥33,000相当</strong>が含まれて、この価格
+                    <strong className="text-pink-600">特典総額¥28,000相当</strong>が含まれて、この価格
                   </p>
                   <p className="text-sm text-gray-700">
                     セミナー料金を大きく上回る価値を提供することをお約束します
@@ -444,7 +446,7 @@ export default function Home() {
                 { label: "日時", value: "2025年12月4日（水）21:00～22:30" },
                 { label: "定員", value: "最大30名（先着順）" },
                 { label: "開催形式", value: "オンライン開催（Zoom）" },
-                { label: "参加費", value: "早割 ¥4,980 / 通常 ¥6,980（税込）※特典総額¥33,000相当" },
+                { label: "参加費", value: "¥6,980（税込）※早割終了・特典総額¥28,000相当" },
                 { label: "対象者", value: "専門知識ゼロ、AI初心者でもOK" },
                 { label: "準備物", value: "ノートPC、インターネット環境" },
               ].map((item) => (
@@ -516,12 +518,16 @@ export default function Home() {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 mb-4 sm:mb-6">
               今すぐ申し込む
             </h2>
-            <p className="text-lg sm:text-xl text-gray-600 mb-3 sm:mb-4 px-4">
-              早割価格¥4,980は先着10名様限定<br />
-              お早めにお申し込みください
-            </p>
+            <div className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-4 mb-4 mx-4 sm:mx-auto max-w-2xl">
+              <p className="text-sm sm:text-base text-gray-800 font-bold mb-1">
+                ⚠️ 早割価格（¥4,980）は終了しました
+              </p>
+              <p className="text-xs sm:text-sm text-gray-700">
+                現在は通常価格 <span className="font-bold text-pink-600">¥6,980</span> での受付となります
+              </p>
+            </div>
             <p className="text-xs sm:text-sm text-gray-500 px-4">
-              ※通常価格¥6,980 / 次回以降¥9,980を予定
+              ※次回以降¥9,980を予定
             </p>
           </div>
 
