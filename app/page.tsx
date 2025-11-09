@@ -169,6 +169,84 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 動画セクション - ヒーロー直下 */}
+      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-gray-50 to-white">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          {/* 見出し - インパクトのある表現 */}
+          <div className="text-center mb-8 sm:mb-10">
+            <div className="inline-flex items-center gap-2 bg-pink-100 rounded-full px-4 py-2 mb-4">
+              <Video className="w-4 h-4 text-pink-600" />
+              <span className="text-pink-600 text-sm font-bold">必見！セミナー解説動画</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 mb-3 sm:mb-4">
+              「本当に2時間で作れるの？」<br />
+              <span className="bg-gradient-to-r from-pink-600 to-blue-600 bg-clip-text text-transparent">
+                その疑問に講師が直接お答えします
+              </span>
+            </h2>
+            <p className="text-base sm:text-lg text-gray-700 max-w-2xl mx-auto">
+              実際に<strong className="text-pink-600">20代〜60代の4名</strong>が<strong className="text-pink-600">1時間以内</strong>でホームページを完成させた実績も。<br />
+              まずはこの動画で、セミナーの詳しい内容をご確認ください。
+            </p>
+          </div>
+
+          {/* YouTubeプレーヤー */}
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-black mx-auto max-w-4xl">
+            <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+              <iframe
+                className="absolute top-0 left-0 w-full h-full"
+                src="https://www.youtube.com/embed/aTFNYZ9jAUg?si=q51dP2-DJg0O2V07"
+                title="ホームページ作成セミナー紹介動画"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+          </div>
+
+          {/* 動画後の補足・訴求 */}
+          <div className="mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+            <div className="bg-white rounded-xl p-4 sm:p-6 shadow-md border-2 border-blue-100">
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
+                <div>
+                  <p className="font-bold text-gray-900 mb-1">専門知識ゼロでOK</p>
+                  <p className="text-sm text-gray-600">ChatGPTとReaddyを使えば誰でも作れます</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white rounded-xl p-4 sm:p-6 shadow-md border-2 border-pink-100">
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="w-6 h-6 text-pink-600 flex-shrink-0 mt-1" />
+                <div>
+                  <p className="font-bold text-gray-900 mb-1">わずか2時間で完成</p>
+                  <p className="text-sm text-gray-600">実際は1時間以内で完成した実績も</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white rounded-xl p-4 sm:p-6 shadow-md border-2 border-blue-100">
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
+                <div>
+                  <p className="font-bold text-gray-900 mb-1">副業にも活用可能</p>
+                  <p className="text-sm text-gray-600">スキルを身につけて収益化も</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* CTAボタン */}
+          <div className="text-center mt-8 sm:mt-10">
+            <a
+              href="#application"
+              className="group inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-pink-600 to-pink-500 px-8 sm:px-12 py-4 sm:py-5 text-lg sm:text-xl font-bold text-white shadow-2xl hover:shadow-pink-500/50 transition-all duration-300 hover:scale-105 min-h-[44px]"
+            >
+              このスキルを身につける
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* セミナー内容セクション */}
       <section id="about" className="py-16 sm:py-24 lg:py-32 bg-white">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -406,7 +484,7 @@ export default function Home() {
                       <Target className="w-8 h-8 text-pink-600" />
                       <h5 className="font-bold text-gray-900">初回限定価格</h5>
                     </div>
-                    <p className="text-gray-700 text-sm">この価格は初回開催限定の特別価格です。次回以降は通常価格¥9,980での提供を予定しています。</p>
+                    <p className="text-gray-700 text-sm">この価格は初回開催限定の特別価格です。</p>
                   </div>
                   <div className="bg-blue-50 rounded-xl p-6">
                     <div className="flex items-center gap-3 mb-3">
@@ -531,9 +609,6 @@ export default function Home() {
                 現在は通常価格 <span className="font-bold text-pink-600">¥6,980</span> での受付となります
               </p>
             </div>
-            <p className="text-xs sm:text-sm text-gray-500 px-4">
-              ※次回以降¥9,980を予定
-            </p>
           </div>
 
           <div className="mx-auto max-w-xl">
